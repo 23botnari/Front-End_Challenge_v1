@@ -1,0 +1,76 @@
+.app {
+  text-align: center;
+}
+.keyboard {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(128, 128, 128, 0.336);
+  text-align: center;
+  justify-content: center;
+
+  &-row {
+    display: flex;
+    color: black;
+    width: 800px;
+  }
+
+  &-row.first &-key {
+    height: 20px;
+    width: 40px;
+  }
+  &-key {
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    margin: 4px;
+    background-color: white;
+    
+  }
+  .delete {
+    width: 70px;
+    p {
+      text-align: right;
+    }
+  }
+  .tab {
+    width: 80px;
+    p {
+      text-align: left;
+    }
+  }
+  .capslock {
+    width: 120px;
+    p {
+      text-align: left;
+    }
+  }
+  .return {
+    width: 120px;
+    p {
+      text-align: right;
+    }
+  }
+  .shift {
+    width: 150px;
+    &:first-child {
+      p:first-child {
+        text-align: left;
+      }
+    }
+    p {
+      text-align: right;
+    }
+  }
+  &-row.last &-key {
+   padding:10px 15px;
+   bottom: 0;
+  }
+  .fn {
+    text-align: left;
+  }
+  .space {
+    width: 250px;
+  }
+
+}
