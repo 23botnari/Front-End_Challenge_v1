@@ -1,154 +1,148 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
-import screenshot from "./screen.jpg";
 function App() {
-  const keyboardLayout = [
+  const [keyboardLayout, setKeyboardLayout] = useState([
     [
-      "esc",
-      "F1",
-      "F2",
-      "F3",
-      "F4",
-      "F5",
-      "F6",
-      "F7",
-      "F8",
-      "F9",
-      "F10",
-      "F11",
-      "F12",
-      "^",
+      { id: 27, label: "esc", state: "default" },
+      { id: 112, label: "F1" },
+      { id: 113, label: "F2" },
+      { id: 114, label: "F3" },
+      { id: 115, label: "F4" },
+      { id: 116, label: "F5" },
+      { id: 117, label: "F6" },
+      { id: 118, label: "F7" },
+      { id: 119, label: "F8" },
+      { id: 120, label: "F9" },
+      { id: 121, label: "F10" },
+      { id: 122, label: "F11" },
+      { id: 123, label: "F12" },
+      { id: 94, label: "^" },
     ],
     [
-      "~",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "0",
-      "-",
-      "=",
-      "delete",
-      // "printscreen",
-      // "scroll lock",
-      // "pause",
+      { id: 192, label: "`", shiftlabel: "~" },
+      { id: 49, label: "1", shiftlabel: "!" },
+      { id: 50, label: "2", shiftlabel: "@" },
+      { id: 51, label: "3", shiftlabel: "#" },
+      { id: 52, label: "4", shiftlabel: "$" },
+      { id: 53, label: "5", shiftlabel: "%" },
+      { id: 54, label: "6", shiftlabel: "^" },
+      { id: 55, label: "7", shiftlabel: "&" },
+      { id: 56, label: "8", shiftlabel: "*" },
+      { id: 57, label: "9", shiftlabel: "(" },
+      { id: 48, label: "0", shiftlabel: ")" },
+      { id: 45, label: "-", shiftlabel: "_" },
+      { id: 61, label: "=", shiftlabel: "+" },
+      { id: 8, label: "delete" },
+      // { id: 557, label: "print screen" },
+      // { id: 145, label: "scroll lock" },
+      // { id: 19, label: "pause" },
     ],
     [
-      "tab",
-      "Q",
-      "W",
-      "E",
-      "R",
-      "T",
-      "Y",
-      "U",
-      "I",
-      "O",
-      "P",
-      "[",
-      "]",
-      "''",
-      // "insert",
-      // "home",
-      // "page up",
+      { id: 9, label: "tab" },
+      { id: 81, label: "Q" },
+      { id: 87, label: "W" },
+      { id: 69, label: "E" },
+      { id: 82, label: "R" },
+      { id: 84, label: "T" },
+      { id: 89, label: "Y" },
+      { id: 85, label: "U" },
+      { id: 73, label: "I" },
+      { id: 79, label: "O" },
+      { id: 80, label: "P" },
+      { id: 219, label: "[", shiftlabel: "{" },
+      { id: 221, label: "]", shiftlabel: "}" },
+      { id: 220, label: "\\", shiftlabel: "|" },
+      // { id: 45, label: "insert" },
+      // { id: 36, label: "home" ,
+      // { id: 33, label: "page up" },
     ],
     [
-      "caps lock",
-      "A",
-      "S",
-      "D",
-      "F",
-      "G",
-      "H",
-      "J",
-      "K",
-      "L",
-      ";",
-      "'",
-      "return",
-      // "delete",
-      // "end",
-      // "page down",
+      { id: 20, label: "caps lock" },
+      { id: 65, label: "A" },
+      { id: 83, label: "S" },
+      { id: 68, label: "D" },
+      { id: 70, label: "F" },
+      { id: 71, label: "G" },
+      { id: 72, label: "H" },
+      { id: 74, label: "J" },
+      { id: 75, label: "K" },
+      { id: 76, label: "L" },
+      { id: 186, label: ";", shiftlabel: ":" },
+      { id: 222, label: "'", shiftlabel: '"' },
+      { id: 13, label: "return" },
+      // { id: 46, label: "delete" },
+      // { id: 35, label: "end" },
+      // { id: 34, label: "page down" },
     ],
     [
-      "shift",
-      "Z",
-      "X",
-      "C",
-      "V",
-      "B",
-      "N",
-      "M",
-      ",",
-      ".",
-      "/",
-      "shift",
+      { id: 15, label: "shift" },
+      { id: 90, label: "Z" },
+      { id: 88, label: "X" },
+      { id: 67, label: "C" },
+      { id: 86, label: "V" },
+      { id: 66, label: "B" },
+      { id: 78, label: "N" },
+      { id: 77, label: "M" },
+      { id: 188, label: ",", shiftlabel: "<" },
+      { id: 190, label: ".", shiftlabel: ">" },
+      { id: 191, label: "/", shiftlabel: "?" },
+      { id: 16, label: "shift" },
+      // { id: 144, label: "num lock" },
       // "num lock",
     ],
     [
-      "fn",
-      "control",
-      "option",
-      "command",
-      " ",
-      "command",
-      "option",
+      { id: 255, label: "fn" },
+      { id: 68, label: "control" },
+      { id: 17, label: "option" },
+      { id: 91, label: "command" },
+      { id: 32, label: "space" },
+      { id: 92, label: "command" },
+      { id: 18, label: "option" },
+      { id: 37, label: "◂" },
+      { id: 40, label: "▾" },
+      { id: 38, label: "▸" },
+      { id: 39, label: "▴" },
       // "left-arrow",
       // "top-arrow",
       // "bot-arrow",
       // "right-arrow",
     ],
-  ];
+  ]);
+
+  
   return (
     <>
       <div className="app">
         <p>React Keyboard UI</p>
         <div className="keyboard">
-          <div className="keyboard-row first">
-            {keyboardLayout[0].map((row, i) => (
+          {/* <div className="keyboard-row first">
+            {keyboardLayout[0].map((firstRow, i) => (
               <div key={i} className="keyboard-key">
-                {row}
+                {firstRow.label}
               </div>
             ))}
-          </div>
-
-          {keyboardLayout.slice(1, 5).map((row, i) => (
-            <div key={i} className="keyboard-row">
-              {row.map((key, j) => (
-                <span
-                  key={j}
-                  className={`keyboard-key 
-                  ${key === "delete" ? "delete" : ""}
-                  ${key === "tab" ? "tab" : ""}
-                  ${key === "caps lock" ? "capslock" : ""}
-                  ${key === "return" ? "return" : ""}
-                  ${key === "shift" ? "shift" : ""}
-                  `}
+          </div>  */}
+          {keyboardLayout?.map((array, arrayIndex) => (
+            <div key={arrayIndex} className="keyboard-row">
+              {array.map((key, keyIndex) => (
+                <div
+                  key={key.id}
+                  id={`k${key.id}`}
+                  className={`keyboard-key ${key.label}`}
+                  style={{ backgroundColor: `${key.state}` }}
+                 
                 >
-                  <p>{key}</p>
-                </span>
+                  <span>
+                    {key.shiftlabel}
+                    <br />
+                    {key.label}
+                  </span>
+                </div>
               ))}
             </div>
           ))}
-          <div className="keyboard-row last">
-            {keyboardLayout[5].map((row, i) => (
-              <div
-                key={i}
-                className={`keyboard-key ${row === "fn" ? "fn" : ""}
-              ${row === " " ? "space" : ""}`}
-              >
-                {row}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
-      <img src={screenshot} alt={"Error"} width={"100%"}></img>
     </>
   );
 }

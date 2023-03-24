@@ -2,12 +2,11 @@
   text-align: center;
 }
 .keyboard {
-  padding: 10px;
-  display: flex;
+  display: grid;
   flex-direction: column;
+  padding: 10px;
   background-color: rgba(128, 128, 128, 0.336);
   text-align: center;
-  justify-content: center;
 
   &-row {
     display: flex;
@@ -17,7 +16,7 @@
 
   &-row.first &-key {
     height: 20px;
-    width: 40px;
+    width: 45px;
   }
   &-key {
     height: 40px;
@@ -25,52 +24,95 @@
     padding: 5px;
     margin: 4px;
     background-color: white;
-    
+    border-radius: 2px;
+    cursor: pointer;
   }
-  .delete {
-    width: 70px;
-    p {
-      text-align: right;
-    }
+
+  #k8.delete {
+    width: 80px;
+    text-align: right;
   }
   .tab {
     width: 80px;
-    p {
-      text-align: left;
-    }
+    text-align: left;
   }
-  .capslock {
-    width: 120px;
-    p {
-      text-align: left;
-    }
+  .caps.lock {
+    width: 100px;
+    text-align: left;
   }
   .return {
     width: 120px;
-    p {
-      text-align: right;
-    }
+    text-align: right;
   }
   .shift {
-    width: 150px;
-    &:first-child {
-      p:first-child {
-        text-align: left;
-      }
-    }
-    p {
-      text-align: right;
-    }
+    width: 125px;
   }
-  &-row.last &-key {
-   padding:10px 15px;
-   bottom: 0;
-  }
-  .fn {
+  .shift:first-child {
     text-align: left;
   }
+  .shift:last-child {
+    text-align: right;
+  }
+  .fn {
+    width: 70px;
+    text-align: left;
+  }
+  .control {
+    width: 45px;
+  }
+  .command {
+    padding-left: 2px;
+    width: 60px;
+  }
   .space {
-    width: 250px;
+    width: 500px;
+  }
+  #k37,
+  #k38,
+  #k40,
+  &-key#k39 {
+    height: 15px;
+    position: relative;
+    margin-top: 29px;
+    span {
+      position: absolute;
+      top: -15px;
+      right: 0;
+      left: 0;
+    }
   }
 
+  #k39{
+    position: absolute;
+    left: 737px;
+    margin-top: 2px;
+    width: 23px;
+  }
+  .print.screen {
+    margin-left: 45px;
+  }
+  .insert {
+    margin-left: 45px;
+  }
+  #k551.delete {
+    margin-left: 45px;
+  }
+  .num.lock {
+    margin-left: 60;
+  }
+  .print.screen,
+  .insert,
+  #k551.delete,
+  .num.lock,
+  .scroll.lock,
+  .pause,
+  .home,
+  .page.up,
+  .end,
+  .page.down {
+    color: red;
+    span {
+      padding: 2px;
+    }
+  }
 }
