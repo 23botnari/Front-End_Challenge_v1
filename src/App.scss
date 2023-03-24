@@ -14,9 +14,15 @@
     width: 800px;
   }
 
-  &-row.first &-key {
+  &-row:first-child &-key {
     height: 20px;
-    width: 45px;
+    position: relative;
+    span {
+      position: absolute;
+      top: -15px;
+      right: 0;
+      left: 0;
+    }
   }
   &-key {
     height: 40px;
@@ -82,7 +88,7 @@
     }
   }
 
-  #k39{
+  #k38 {
     position: absolute;
     left: 737px;
     margin-top: 2px;

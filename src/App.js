@@ -30,8 +30,8 @@ function App() {
       { id: 56, label: "8", shiftlabel: "*" },
       { id: 57, label: "9", shiftlabel: "(" },
       { id: 48, label: "0", shiftlabel: ")" },
-      { id: 45, label: "-", shiftlabel: "_" },
-      { id: 61, label: "=", shiftlabel: "+" },
+      { id: 189, label: "-", shiftlabel: "_" },
+      { id: 187, label: "=", shiftlabel: "+" },
       { id: 8, label: "delete" },
       // { id: 557, label: "print screen" },
       // { id: 145, label: "scroll lock" },
@@ -75,7 +75,7 @@ function App() {
       // { id: 34, label: "page down" },
     ],
     [
-      { id: 15, label: "shift" },
+      { id: 16, label: "shift" },
       { id: 90, label: "Z" },
       { id: 88, label: "X" },
       { id: 67, label: "C" },
@@ -92,45 +92,78 @@ function App() {
     ],
     [
       { id: 255, label: "fn" },
-      { id: 68, label: "control" },
-      { id: 17, label: "option" },
+      { id: 17, label: "control" },
+      { id: 18, label: "option" },
       { id: 91, label: "command" },
       { id: 32, label: "space" },
       { id: 92, label: "command" },
       { id: 18, label: "option" },
       { id: 37, label: "◂" },
       { id: 40, label: "▾" },
-      { id: 38, label: "▸" },
-      { id: 39, label: "▴" },
+      { id: 39, label: "▸" },
+      { id: 38, label: "▴" },
       // "left-arrow",
       // "top-arrow",
       // "bot-arrow",
       // "right-arrow",
     ],
   ]);
+  useEffect(() => {
+    const keyPressed = (e) => {
+      const { keyCode } = e;
+      const newState = keyboardLayout.map((row) =>
+        row.map((key) => {
+          if (key.id === keyCode) {
+            return { ...key, state: "Blue" };
+          } else {
+            return key;
+          }
+        })
+      );
 
-  
+      setKeyboardLayout(newState);
+    };
+    const keyReleased = (e) => {
+      const { keyCode } = e;
+      const newState = keyboardLayout.map((row) =>
+        row.map((key) => {
+          if (key.id === keyCode) {
+            return { ...key, state: "Green" };
+          } else {
+            return key;
+          }
+        })
+      );
+      setKeyboardLayout(newState);
+    };
+
+    document.addEventListener("keydown", keyPressed);
+    document.addEventListener("keyup", keyReleased);
+    return () => {
+      document.removeEventListener("keydown", keyPressed);
+      document.removeEventListener("keyup", keyReleased);
+    };
+  }, []);
+
+  const handleClick = (id) => {
+    console.log(`Clicked item with id ${id}`);
+  };
+
   return (
     <>
       <div className="app">
         <p>React Keyboard UI</p>
         <div className="keyboard">
-          {/* <div className="keyboard-row first">
-            {keyboardLayout[0].map((firstRow, i) => (
-              <div key={i} className="keyboard-key">
-                {firstRow.label}
-              </div>
-            ))}
-          </div>  */}
           {keyboardLayout?.map((array, arrayIndex) => (
             <div key={arrayIndex} className="keyboard-row">
-              {array.map((key, keyIndex) => (
+              {array.map((key) => (
                 <div
                   key={key.id}
                   id={`k${key.id}`}
                   className={`keyboard-key ${key.label}`}
                   style={{ backgroundColor: `${key.state}` }}
-                 
+                  tabIndex="0"
+                  onClick={() => handleClick(key.label)}
                 >
                   <span>
                     {key.shiftlabel}
