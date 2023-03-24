@@ -120,8 +120,9 @@ function App() {
           }
         })
       );
-
-      setKeyboardLayout(newState);
+      setTimeout(() => {
+        setKeyboardLayout([...newState]);
+      }, 3000);
     };
     const keyReleased = (e) => {
       const { keyCode } = e;
