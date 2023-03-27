@@ -121,11 +121,10 @@ const App = () => {
         row.map((key) => {
           if (key.id === keyCode) {
             return { ...key, state: "Blue" };
-          } else  {
+          } else {
             return key;
           }
-        }
-        )
+        })
       );
       setTimeout(() => {
         setKeyboardLayout([...newState]);
@@ -179,32 +178,7 @@ const App = () => {
 
     return () => clearInterval(intervalId);
   }, [secondsLeft]);
-  const mouseDown = (id) => {
-    const newState = keyboardLayout.map((row) =>
-      row.map((key) => {
-        if (key.id === id) {
-          return { ...key, state: "Blue" };
-        } else {
-          return key;
-        }
-      })
-    );
-    setTimeout(() => {
-      setKeyboardLayout([...newState]);
-    }, 3000);
-  };
-  const mouseUp = (id) => {
-    const newState = keyboardLayout.map((row) =>
-      row.map((key) => {
-        if (key.id === id) {
-          return { ...key, state: "Green" };
-        } else {
-          return key;
-        }
-      })
-    );
-    setKeyboardLayout(newState);
-  };
+
   const keyRepeat = () => {
     {
       previousKeys.map((keyCode, index) => {
@@ -241,16 +215,12 @@ const App = () => {
         <button onClick={keyRepeat}>Repeat</button>
         <div className="keyboard">
           {keyboardLayout?.map((row) => (
-            <div key={row} className="keyboard-row">
+            <div className="keyboard-row">
               {row.map((key) => (
                 <div
-                  key={key.id}
                   id={`k${key.id}`}
                   className={`keyboard-key ${key.label}`}
                   style={{ backgroundColor: `${key.state}` }}
-                  onClick={startTimer}
-                  onMouseDown={() => mouseDown(key.id)}
-                  onMouseUp={() => mouseUp(key.id)}
                 >
                   <span>
                     {key.shiftlabel}
